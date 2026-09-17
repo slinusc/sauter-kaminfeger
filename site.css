@@ -70,6 +70,11 @@ textarea:focus-visible, video:focus-visible {
 [data-player][data-playing] [data-play] { opacity: 0; pointer-events: none; }
 [data-player] [data-play]:focus-visible { outline: 2px solid #fff; outline-offset: -6px; }
 
+/* Header-Videos: kein iOS-Play-Button, falls Autoplay trotzdem blockiert ist
+   (z. B. Stromsparmodus) – dann bleibt einfach das Posterbild stehen. */
+video[autoplay]::-webkit-media-controls-start-playback-button { display: none; -webkit-appearance: none; }
+video[autoplay]::-webkit-media-controls { display: none; }
+
 /* ==========================================================================
    Mobile-Ansicht
    Die Desktop-Werte stehen als Defaults hier bzw. als Variablen-Defaults;

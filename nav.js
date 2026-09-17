@@ -48,3 +48,37 @@
     function () { if (mq.matches && isOpen()) setOpen(false); }
   );
 })();
+
+/* Header-Videos auf iOS.
+   React setzt "muted" nur als Property, nicht als Attribut. iOS Safari
+   verlangt das Attribut fuer Autoplay und zeigt sonst einen Play-Button.
+   Die Videos haengt support.js erst spaeter ein und entfernt dabei das
+   Attribut wieder, daher beobachtet der Observer auch Attributaenderungen. */
+(function () {
+  "use strict";
+
+  function fix(video) {
+    if (video.hasAttribute("muted")) return;
+    video.muted = true;
+    video.setAttribute("muted", "");
+    if (video.paused) {
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+  }
+
+  function scan(root) {
+    if (root.matches && root.matches("video[autoplay]")) fix(root);
+    if (root.querySelectorAll) Array.prototype.forEach.call(root.querySelectorAll("video[autoplay]"), fix);
+  }
+
+  scan(document);
+  new MutationObserver(function (records) {
+    records.forEach(function (r) {
+      if (r.type === "attributes") scan(r.target);
+      else Array.prototype.forEach.call(r.addedNodes, scan);
+    });
+  }).observe(document.documentElement, {
+    childList: true, subtree: true, attributes: true, attributeFilter: ["muted", "autoplay"]
+  });
+})();
