@@ -1,0 +1,10 @@
+# Build-Ausgaben (publish.py -> dist/, preview.py -> _site/)
+dist/
+_site/
+
+# Rohmaterial, wird nicht ausgeliefert
+pictures/
+_masters/
+
+__pycache__/
+.DS_Store

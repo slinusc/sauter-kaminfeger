@@ -1,0 +1,32 @@
+# Weiterleitungen für den Livegang.
+# Format: <alt>  <neu>  <status>   (Netlify/Cloudflare-Pages-Syntax)
+
+# --- 1) Alte Seite sauter-kaminfeger.ch ------------------------------------
+# TODO: Seitenliste aus der Google Search Console exportieren (Seiten-Report)
+# und jede alte URL hier eintragen. Da keine Seite wegfällt, ist die
+# Zuordnung 1:1 möglich. Ohne diese Zeilen geht bestehendes Ranking verloren.
+#
+# Beispiel:
+# /dienstleistungen/oelheizung.html    /oelheizungen/    301
+
+# --- 2) Alias --------------------------------------------------------------
+/datenschutz   /impressum/   200
+
+# --- 3) Alte Canvas-Dateinamen (falls je verlinkt) -------------------------
+/Sauter%20Landingpage.dc.html    /                        301
+/Kaminfegerarbeiten.dc.html      /kaminfegerarbeiten/     301
+/Oelheizungen.dc.html            /oelheizungen/           301
+/Holzheizung.dc.html             /holzheizung/            301
+/Gasheizungen.dc.html            /gasheizungen/           301
+/Kacheloefen%20Cheminee.dc.html  /kachelofen-cheminee/    301
+/Feuerungskontrolle.dc.html      /feuerungskontrolle/     301
+/Neutrale%20Beratung.dc.html     /neutrale-beratung/      301
+/Lueftungsreinigung.dc.html      /lueftungsreinigung/     301
+/Bad%20WC%20Abluftanlagen.dc.html /bad-wc-abluftanlagen/  301
+/Komfortlueftung.dc.html         /komfortlueftung/        301
+/Videoinspektion.dc.html         /videoinspektion/        301
+/Tiefgaragenlueftung.dc.html     /tiefgaragenlueftung/    301
+/CO2%20Messungen.dc.html         /co2-messung/            301
+/Serviceplan.dc.html             /serviceplan/            301
+/Team.dc.html                    /team/                   301
+/Kontakt.dc.html                 /kontakt/                301

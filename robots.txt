@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sauter-kaminfeger.ch/sitemap.xml
