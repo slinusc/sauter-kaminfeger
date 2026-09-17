@@ -62,6 +62,9 @@
     video.muted = true;
     video.setAttribute("muted", "");
     if (video.paused) {
+      // iOS entscheidet beim Laden ueber Autoplay; ohne neues Laden bleibt
+      // das Video trotz muted stehen.
+      video.load();
       var p = video.play();
       if (p && p.catch) p.catch(function () {});
     }
