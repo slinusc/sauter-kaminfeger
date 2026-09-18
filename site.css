@@ -70,10 +70,18 @@ textarea:focus-visible, video:focus-visible {
 [data-player][data-playing] [data-play] { opacity: 0; pointer-events: none; }
 [data-player] [data-play]:focus-visible { outline: 2px solid #fff; outline-offset: -6px; }
 
-/* Header-Videos: kein iOS-Play-Button, falls Autoplay trotzdem blockiert ist
-   (z. B. Stromsparmodus) – dann bleibt einfach das Posterbild stehen. */
-video[autoplay]::-webkit-media-controls-start-playback-button { display: none; -webkit-appearance: none; }
-video[autoplay]::-webkit-media-controls { display: none; }
+/* Header-Videos: kein iOS-Play-Button, falls Autoplay blockiert ist
+   (z. B. Stromsparmodus) – dann bleibt das Posterbild stehen.
+   !important ist hier noetig: Safari setzt diese Shadow-Elemente sonst
+   ueber das eigene UA-Stylesheet wieder sichtbar. Fallback in nav.js. */
+video[autoplay]::-webkit-media-controls,
+video[autoplay]::-webkit-media-controls-panel,
+video[autoplay]::-webkit-media-controls-play-button,
+video[autoplay]::-webkit-media-controls-overlay-play-button,
+video[autoplay]::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
 
 /* ==========================================================================
    Mobile-Ansicht
@@ -99,7 +107,7 @@ video[autoplay]::-webkit-media-controls { display: none; }
   background: linear-gradient(to bottom, rgba(10,12,16,0.94) 0%,
                               rgba(10,12,16,0.7) 45%, rgba(10,12,16,0) 100%);
 }
-.site-logo { height: 46px; width: auto; }
+.site-logo { height: 54px; width: auto; }
 
 .site-nav {
   order: 2; flex: 1 1 0; min-width: 0;
@@ -169,7 +177,7 @@ video[autoplay]::-webkit-media-controls { display: none; }
     --split-h: 48vh;
     --form-span: auto;    /* einspaltig: kein Spannen ueber zwei Spalten */
   }
-  .site-logo { height: 34px; }
+  .site-logo { height: 40px; }
   .site-nav { padding-top: 84px; }
 }
 

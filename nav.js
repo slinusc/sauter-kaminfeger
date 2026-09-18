@@ -57,16 +57,42 @@
 (function () {
   "use strict";
 
+  // Blockiert iOS das Abspielen trotzdem (Stromsparmodus), das Video durch
+  // sein Posterbild ersetzen – sonst zeigt Safari einen Play-Button.
+  function showPoster(video) {
+    var poster = video.getAttribute("poster");
+    if (!poster || video.style.display === "none") return;
+    var img = document.createElement("img");
+    img.src = poster;
+    img.alt = "";
+    img.setAttribute("style", video.getAttribute("style") || "");
+    video.parentNode.insertBefore(img, video);
+    video.style.display = "none";
+  }
+
+  function play(video) {
+    var p = video.play();
+    if (p && p.catch) p.catch(function (err) {
+      if (err && err.name === "NotAllowedError") showPoster(video);
+    });
+  }
+
   function fix(video) {
-    if (video.hasAttribute("muted")) return;
+    if (video.hasAttribute("muted")) {
+      if (!video.__autoplayChecked) {
+        video.__autoplayChecked = true;
+        if (video.paused) play(video);
+      }
+      return;
+    }
     video.muted = true;
     video.setAttribute("muted", "");
+    video.__autoplayChecked = true;
     if (video.paused) {
       // iOS entscheidet beim Laden ueber Autoplay; ohne neues Laden bleibt
       // das Video trotz muted stehen.
       video.load();
-      var p = video.play();
-      if (p && p.catch) p.catch(function () {});
+      play(video);
     }
   }
 
